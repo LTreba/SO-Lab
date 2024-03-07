@@ -21,4 +21,4 @@ Nosso programa é uma simples troca de mensagens que usa a criação de dois pro
 Para comunicação entre os dois processos foi necessários o uso de pipe, que consiste na criação de um espaço de memória compartilhado, onde apenas um processo escreve na memória e outro só pode ler. Definimos com a função write() que iriamos escrever na memória uma string no processo pai e fechamos a leitura para esse com close(), já no processo filho, a escrita ficará bloqueada e leitura liberada. Desse modo foi possível estabelecer comunicação entre esses dois espaços de memória. 
  
 ## Console da AWS rodando o programa:
-<img src="https://imgur.com/a/nLHKQM3" alt="Print AWS">
+<img src="https://i.imgur.com/9dKYAtG.png" alt="Print AWS">
