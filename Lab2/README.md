@@ -17,3 +17,7 @@ No exemplo citado, são criados 8 processos no total, descobrimos isso pois o n�
 
 ## Exercício
 
+Nosso programa é uma simples troca de mensagens que usa a criação de dois processos, um pai e um filho através da função fork() da lib sys.types. A execução do programa segue a seguinte ordem: depois de criado em fork(), o processo pai é executado na verificação if(pid>0), que printa duas mensagens, até a chamada de função wait(). A função wait() pausa a execução do pai e recomeça execução do programa após o fork(), porém agora será executada a sessão em que o pid é igual 0 até o final do programa, e então acontece a retomada do processo pai que finaliza a execução.
+ 
+##Console da AWS rodando o programa:
+<img src="https://i.imgur.com/5OdGrY7.png" alt="Print AWS">
