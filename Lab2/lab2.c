@@ -4,14 +4,17 @@
 #include <unistd.h>
 #include <wait.h>
 
-/*Programa feito para o Laboratório 2 de Sistemas Operacionais
-em os processos pai e filho trocam algum tipo de mensagem.*/
+#define BUFFER 256
 
 int main() {
+  int fd[2];
   pid_t pid;
 
-  printf("Seu Adenor chega do trabalho e encontra seu filho João na sala:\n");
-  printf("\n");
+  // Criar o pipe
+  if (pipe(fd) == -1) {
+    perror("Erro ao criar o pipe");
+    exit(EXIT_FAILURE);
+  }
 
   pid = fork(); // cria um processo filho
 
@@ -20,19 +23,29 @@ int main() {
     return 1;
 
   } else if (pid > 0) { // processo pai
-    printf("Filho, aqui é o processo pai. Antes de mais nada...\n");
-    printf("Você fez a sua tarefa de casa?\n");
-    wait(NULL);
+    close(fd[0]); // Fechar a extremidade de leitura do pipe no processo pai
 
-    printf("\n");
-    printf("Que bom filho, o meu no caso é %d\n", pid);
-    printf("Estou orgulhoso de você! Vamos jantar. \n");
+    char str[BUFFER] = "Ola, filho! Esta é uma mensagem de seu pai enviada pelo pipe!\n";
+    
+    printf("Mensagem enviada para filho com sucesso!\n");
+    
+    write(fd[1], str, sizeof(str)); // Escrever no pipe
 
-  } else { // processo filho
-    printf("\n");
-    printf("Pai, aqui é o processo filho. \n");
-    printf("Fiz minha tarefa e descobri que meu PID é %d\n", pid);
-    printf("E isso ocorre por conta da função fork! \n");
+    close(fd[1]); // Fechar a extremidade de escrita do pipe no processo pai
+    wait(NULL);   // Aguardar o término do processo filho
+    
+  } else {// processo filho
+    char str_received[BUFFER];
+
+    close(fd[1]); // Fechar a extremidade de escrita do pipe no processo filho
+
+    read(fd[0], str_received, sizeof(str_received)); // Ler do pipe
+
+    printf("Pai, recebi a mensagem: \n%s\n", str_received);
+    printf("De filho, finalizando...\n");
+    
+    close(fd[0]); // Fechar a extremidade de leitura do pipe no processo filho
+    exit(0);
   }
   return 0;
 }
