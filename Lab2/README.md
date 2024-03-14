@@ -1,4 +1,4 @@
-# Laboratório 02 - Sistemas Operacionais
+# Laboratório 2 - Sistemas Operacionais
 
 **Neste laboratório, estudamos e analisamos codigos propostos e desenvolvemos um programa escrito na linguagem C baseado no conceito de processos do Sistema Operacional, 
 focando principalmente nos comandos: fork(), que cria um novo processo que tem como pai o processo que o chamou;
