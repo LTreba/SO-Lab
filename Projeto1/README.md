@@ -9,3 +9,6 @@ R:
 
 ### 3. Discorra sobre as diferenças entre as implementações utilizando threads e processos e diga qual foi mais eficiente na solução do problema, justificando sua resposta.
 R:
+
+## Execução com thread
+<img src="https://i.imgur.com/jcAMdMj.png" alt="execucaoThread">
