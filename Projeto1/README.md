@@ -3,12 +3,20 @@
 
 ### 1. Qual a estratégia que você utilizou para evitar que duas pessoas acessem a escada rolante ao mesmo tempo em cada abordagem?
 R:
+- Na abordagem de threads, nós utilizamos um mutex da biblioteca phthreads para evitar que duas pessoas acessem a escada rolante ao mesmo tempo, fazemos isso bloqueando o mutex antes de acessar as váriaveis compartilhadas de tempo e direção, permitindo apenas que a thread atual as altere.
+
+- Enquanto na abordagem de processos, utilizamos um semáforo, que também permite que apenas um processo modifique o atributo da struct na memoria compartilhada, ao ser bloquea-lo antes de acessar a região crítica e desbloqueá-lo após as alterações.
 
 ### 2. Como garantir que somente uma das direções está ativa de cada vez em cada uma das abordagens?
-R:
+R: Podemos garantir isso, ao verificar:
+- Com threads, por meio do bloqueio do mutex, qual a direção atual indicada pela variável global compartilhada entre as threads, caso seja igual a -1 ou a atual, soma 10 ao tempo final, caso contrário espera a pessoa atual terminar sua travessia e então troca o sinal (direção) da escada e soma 10 ao tempo final.
+- Com processos, realizamos as mesmas ações, mas dessa vez através do bloqueio do semáforo verificamos a direção do struct na região compartilhada de memória.
 
 ### 3. Discorra sobre as diferenças entre as implementações utilizando threads e processos e diga qual foi mais eficiente na solução do problema, justificando sua resposta.
-R:
+R: Na implementação utilizando processos, por conta do espaço de endereçamento exclusivo, temos de criar uma região de memória compartilhada (shm) para realizar a comunicação entre os processos, o que é custoso quando consideramos múltiplas trocas de informação durante a execução do programa. Por outro lado, quando implementamos por meio de threads, o compartilhamento de memoria já é nativa entre as threads, o que exige menos da máquina, além disso, a criação de cada thread é mais leve que a criação dos processos filhos, o que nos leva a concluir que para esse caso, em que a comunicação deve ser alta e a necessidade de paralelização baixa, a implementação com threads se mostra mais eficiente que a de processos.
 
 ## Execução com thread (E_1)
 <img src="https://i.imgur.com/jcAMdMj.png" alt="execucaoThread">
+
+## Execução com processo (E_1)
+<img src="https://i.imgur.com/N3FgKEn.png" alt="execucaoProcesso">
