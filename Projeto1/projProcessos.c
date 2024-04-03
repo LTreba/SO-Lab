@@ -23,7 +23,7 @@ int criarProcessosFilhos(FILE *arquivo,int numPassageiros,Passageiro *passageiro
 
 int main(){
     int numPassageiros;
-    FILE* arquivo = fopen("entrada.txt", "r");
+    FILE* arquivo = fopen("./input/E_1", "r");
     if(arquivo==NULL){
         printf("Erro ao abrir arquivo!");
         exit(1);
