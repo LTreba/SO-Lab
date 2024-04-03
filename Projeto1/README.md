@@ -9,8 +9,8 @@ R:
 
 ### 2. Como garantir que somente uma das direções está ativa de cada vez em cada uma das abordagens?
 R: Podemos garantir isso, ao verificar:
-- Com threads, por meio do bloqueio do mutex, qual a direção atual indicada pela variável global compartilhada entre as threads, caso seja igual a -1 ou a atual, soma 10 ao tempo final, caso contrário espera a pessoa atual terminar sua travessia e então troca o sinal (direção) da escada e soma 10 ao tempo final.
-- Com processos, realizamos as mesmas ações, mas dessa vez através do bloqueio do semáforo verificamos a direção do struct na região compartilhada de memória.
+- Com threads, por meio do bloqueio do mutex, qual a direção atual indicada pela variável global compartilhada entre as threads, caso seja igual a -1 ou a pessoa que está na escada, soma 10 segundos ao momento em que a pessoa atual tenha chegado, caso contrário espera a pessoa que ocupa a escada terminar sua travessia, e então troca o sinal (direção) da escada e soma 10 ao tempo resultante da travessia ate o momento.
+- Com processos, realizamos as mesmas ações, mas dessa vez através do bloqueio do semáforo verificamos a direção atual do struct na região compartilhada de memória para fazer o cálculo.
 
 ### 3. Discorra sobre as diferenças entre as implementações utilizando threads e processos e diga qual foi mais eficiente na solução do problema, justificando sua resposta.
 R: Na implementação utilizando processos, por conta do espaço de endereçamento exclusivo, temos de criar uma região de memória compartilhada (shm) para realizar a comunicação entre os processos, o que é custoso quando consideramos múltiplas trocas de informação durante a execução do programa. Por outro lado, quando implementamos por meio de threads, o compartilhamento de memoria já é nativa entre as threads, o que exige menos da máquina, além disso, a criação de cada thread é mais leve que a criação dos processos filhos, o que nos leva a concluir que para esse caso, em que a comunicação deve ser alta e a necessidade de paralelização baixa, a implementação com threads se mostra mais eficiente que a de processos.
