@@ -12,7 +12,6 @@
 #define _GNU_SOURCE
 
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
-//sem_t semaforo;
 int direcao = -1;
 int tempoFinal = 0;
 
@@ -51,7 +50,6 @@ int main() {
 
   lerPassageiros("./input/E_1", passageiros, &numPassageiros);
 
-  //sem_init(&semaforo, 0, 1);
 
   for(int i = 0; i < numPassageiros; i++){
     pthread_create(&threads[i], NULL, calculaTempoPassageiro, (void *)&passageiros[i]);
