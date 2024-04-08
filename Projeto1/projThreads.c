@@ -26,6 +26,14 @@ void *calculaTempoPassageiro(void *passageiro){
   if(direcao==-1 || passageiroAtual->direcao==direcao){
     direcao = passageiroAtual->direcao;
     tempoFinal = passageiroAtual->tempo+10;
+  }else{
+    pthread_mutex_unlock(&mutex);
+    sleep(tempoFinal-passageiroAtual->tempo);
+    pthread_mutex_lock(&mutex);
+
+    direcao = passageiroAtual->direcao;
+    tempoFinal += 10;
+
   }
   pthread_mutex_unlock(&mutex);
 }
@@ -48,7 +56,7 @@ int main() {
   pthread_t threads[10000];
   int numPassageiros;
 
-  lerPassageiros("./input/E_1", passageiros, &numPassageiros);
+  lerPassageiros("./input/E_5", passageiros, &numPassageiros);
 
 
   for(int i = 0; i < numPassageiros; i++){
@@ -61,6 +69,5 @@ int main() {
   }
 
   printf("O momento final de parada da escada rolante é %d\n", tempoFinal);
-
-  return 0;
+   return 0;
 }

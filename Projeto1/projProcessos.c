@@ -23,7 +23,7 @@ int criarProcessosFilhos(FILE *arquivo,int numPassageiros,Passageiro *passageiro
 
 int main(){
     int numPassageiros;
-    FILE* arquivo = fopen("./input/E_1", "r");
+    FILE* arquivo = fopen("./input/E_5", "r");
     if(arquivo==NULL){
         printf("Erro ao abrir arquivo!");
         exit(1);
@@ -83,6 +83,12 @@ void calculaTempoPassageiro(int chegada,int dir,Passageiro *passageiro,sem_t *se
     sem_wait(semaforo);
     if(passageiro->direcao == -1||passageiro->direcao == dir){
         passageiro->direcao = dir;passageiro->tempo = chegada + 10;
+    }else{
+      sem_post(semaforo);
+      sleep(passageiro->tempo-chegada);
+      sem_wait(semaforo);
+      passageiro->direcao = dir;
+      passageiro->tempo = chegada + 10;
     }
     sem_post(semaforo);
 }
