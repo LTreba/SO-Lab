@@ -28,9 +28,12 @@ R: Na implementação utilizando processos, por conta do espaço de endereçamen
 <img src="https://i.imgur.com/1agLIsj.png" alt="execucaoThread">
 
 ## Execução com processo (E_4)
+<img src="https://i.imgur.com/lgNLYaL.png" alt="execucaoProcesso">
 
 ## Execução com thread (E_5)
 
 <img src="https://i.imgur.com/REkxMyx.png" alt="execucaoThread">
 
 ## Execução com processo (E_5)
+
+<img src="https://i.imgur.com/iPJUDlv.png" alt="execucaoProcesso">
