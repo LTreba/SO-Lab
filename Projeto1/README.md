@@ -17,82 +17,20 @@ R: Na implementação utilizando processos, por conta do espaço de endereçamen
 
 ## Execução com thread (E_1)
 
-3
-5 0
-8 0
-13 0
-
 <img src="https://i.imgur.com/jcAMdMj.png" alt="execucaoThread">
 
 ## Execução com processo (E_1)
-
-3
-
-5 0
-
-8 0
-
-13 0
 
 <img src="https://i.imgur.com/N3FgKEn.png" alt="execucaoProcesso">
 
 ## Execução com thread (E_4)
 
-5
-
-2 0
-
-8 1
-
-16 0
-
-17 1
-
-32 0
-
 <img src="https://i.imgur.com/1agLIsj.png" alt="execucaoThread">
 
 ## Execução com processo (E_4)
 
-5
-
-2 0
-
-8 1
-
-16 0
-
-17 1
-
-32 0
-
-
 ## Execução com thread (E_5)
-
-5
-
-5 0
-
-7 1
-
-10 0
-
-13 1
-
-25 1
 
 <img src="https://i.imgur.com/REkxMyx.png" alt="execucaoThread">
 
 ## Execução com processo (E_5)
-
-5
-
-5 0
-
-7 1
-
-10 0
-
-13 1
-
-25 1
