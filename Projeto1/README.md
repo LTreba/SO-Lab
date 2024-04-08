@@ -16,7 +16,50 @@ R: Podemos garantir isso:
 R: Na implementação utilizando processos, por conta do espaço de endereçamento exclusivo, temos de criar uma região de memória compartilhada (shm) para realizar a comunicação entre os processos, o que é custoso quando consideramos múltiplas trocas de informação durante a execução do programa. Por outro lado, quando implementamos por meio de threads, o compartilhamento de memoria já é nativa entre as threads, o que exige menos da máquina, além disso, a criação de cada thread é mais leve que a criação dos processos filhos, o que nos leva a concluir que para esse caso, em que a comunicação deve ser alta e a necessidade de paralelização baixa, a implementação com threads se mostra mais eficiente que a de processos.
 
 ## Execução com thread (E_1)
+3
+5 0
+8 0
+13 0
 <img src="https://i.imgur.com/jcAMdMj.png" alt="execucaoThread">
 
 ## Execução com processo (E_1)
+3
+5 0
+8 0
+13 0
 <img src="https://i.imgur.com/N3FgKEn.png" alt="execucaoProcesso">
+
+## Execução com thread (E_4)
+5
+2 0
+8 1
+16 0
+17 1
+32 0
+<img src="https://i.imgur.com/1agLIsj.png" alt="execucaoThread">
+
+
+## Execução com processo (E_4)
+5
+2 0
+8 1
+16 0
+17 1
+32 0
+
+## Execução com thread (E_5)
+5
+5 0
+7 1
+10 0
+13 1
+25 1
+<img src="https://i.imgur.com/REkxMyx.png" alt="execucaoThread">
+
+## Execução com processo (E_5)
+5
+5 0
+7 1
+10 0
+13 1
+25 1
