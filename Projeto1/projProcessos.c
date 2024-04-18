@@ -64,8 +64,9 @@ int ultimoMomentoEscada(Passageiro *passageiros, int numPassageiros) {
       }
     }
   }
-  if (filaEsperando > 0) {
+  while (filaEsperando > 0) {
     tempoFinal += 10;
+    filaEsperando--;
   }
 
   return tempoFinal;
