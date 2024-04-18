@@ -22,7 +22,11 @@ typedef struct {
 
 void *calculaTempoPassageiro(void *passageiro) {
   Passageiro *passageiroAtual = (Passageiro *)passageiro;
-  if (direcao == -1 || passageiroAtual->direcao == direcao) {
+  if (direcao == -1){
+    direcao = passageiroAtual->direcao;
+    tempoFinal = passageiroAtual->tempo + 10;
+  }
+  else if (passageiroAtual->direcao == direcao) {
     if (filaEsperando > 0 && passageiroAtual->tempo > tempoFinal) {
       filaEsperando = 1;
       tempoFinal += 10;
