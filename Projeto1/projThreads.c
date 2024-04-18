@@ -1,54 +1,62 @@
-#include <stdlib.h>
 #include <malloc.h>
+#include <pthread.h>
+#include <sched.h>
+#include <semaphore.h>
+#include <signal.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <signal.h>
-#include <sched.h>
-#include <stdio.h>
 #include <unistd.h>
 #include <wait.h>
-#include <semaphore.h>
-#include <pthread.h>
 #define _GNU_SOURCE
 
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 int direcao = -1;
 int tempoFinal = 0;
+int filaEsperando = 0;
 
 typedef struct {
-    int tempo, direcao;
+  int tempo, direcao;
 } Passageiro;
 
-void *calculaTempoPassageiro(void *passageiro){
+void *calculaTempoPassageiro(void *passageiro) {
   Passageiro *passageiroAtual = (Passageiro *)passageiro;
-  sleep(passageiroAtual->tempo);
-  pthread_mutex_lock(&mutex);
-  if(direcao==-1 || passageiroAtual->direcao==direcao){
-    direcao = passageiroAtual->direcao;
-    tempoFinal = passageiroAtual->tempo+10;
-  }else{
-    pthread_mutex_unlock(&mutex);
-    sleep(tempoFinal-passageiroAtual->tempo);
-    pthread_mutex_lock(&mutex);
-
-    direcao = passageiroAtual->direcao;
-    tempoFinal += 10;
-
+  if (direcao == -1 || passageiroAtual->direcao == direcao) {
+    if (filaEsperando > 0 && passageiroAtual->tempo > tempoFinal) {
+      filaEsperando = 1;
+      tempoFinal += 10;
+      direcao = passageiroAtual->direcao * (-1);
+    } else {
+      direcao = passageiroAtual->direcao;
+      tempoFinal = passageiroAtual->tempo + 10;
+    }
+  } else {
+    if (passageiroAtual->tempo > tempoFinal) {
+      if (filaEsperando > 0) {
+        tempoFinal += 10;
+        filaEsperando = 1;
+      } else {
+        tempoFinal = passageiroAtual->tempo + 10;
+      }
+    } else {
+      filaEsperando++;
+    }
   }
-  pthread_mutex_unlock(&mutex);
 }
 
-void lerPassageiros(char* caminhoArquivo, Passageiro* passageiros, int* numPassageiros) {
-    FILE* arquivo = fopen(caminhoArquivo, "r");
-    if (arquivo == NULL) {
-        printf("Erro ao abrir o arquivo.\n");
-        exit(1);
-    }
-    fscanf(arquivo, "%d", numPassageiros);
-    for (int i = 0; i < *numPassageiros; i++) {
-        fscanf(arquivo, "%d %d", &passageiros[i].tempo, &passageiros[i].direcao);
-    }
-    fclose(arquivo);
+void lerPassageiros(char *caminhoArquivo, Passageiro *passageiros,
+                    int *numPassageiros) {
+  FILE *arquivo = fopen(caminhoArquivo, "r");
+  if (arquivo == NULL) {
+    printf("Erro ao abrir o arquivo.\n");
+    exit(1);
+  }
+  fscanf(arquivo, "%d", numPassageiros);
+  for (int i = 0; i < *numPassageiros; i++) {
+    fscanf(arquivo, "%d %d", &passageiros[i].tempo, &passageiros[i].direcao);
+  }
+  fclose(arquivo);
 }
 
 int main() {
@@ -58,16 +66,16 @@ int main() {
 
   lerPassageiros("./input/E_5", passageiros, &numPassageiros);
 
-
-  for(int i = 0; i < numPassageiros; i++){
-    pthread_create(&threads[i], NULL, calculaTempoPassageiro, (void *)&passageiros[i]);
-  }
-
-  // Esperando as threads terminarem
-  for(int i = 0; i < numPassageiros; i++){
+  for (int i = 0; i < numPassageiros; i++) {
+    pthread_create(&threads[i], NULL, calculaTempoPassageiro,
+                   (void *)&passageiros[i]);
     pthread_join(threads[i], NULL);
   }
 
+  if (filaEsperando > 0) {
+    tempoFinal += 10;
+  }
+
   printf("O momento final de parada da escada rolante é %d\n", tempoFinal);
-   return 0;
+  return 0;
 }
