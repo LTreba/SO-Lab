@@ -76,8 +76,9 @@ int main() {
     pthread_join(threads[i], NULL);
   }
 
-  if (filaEsperando > 0) {
+  while (filaEsperando > 0) {
     tempoFinal += 10;
+    filaEsperando--;
   }
 
   printf("O momento final de parada da escada rolante é %d\n", tempoFinal);
