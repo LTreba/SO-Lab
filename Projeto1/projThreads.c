@@ -1,7 +1,5 @@
-#include <malloc.h>
 #include <pthread.h>
 #include <sched.h>
-#include <semaphore.h>
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
