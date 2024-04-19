@@ -1,7 +1,5 @@
 #include <fcntl.h>
-#include <malloc.h>
 #include <sched.h>
-#include <semaphore.h>
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,44 +30,35 @@ void lerPassageiros(char *caminhoArquivo, Passageiro *passageiros,
 }
 
 int ultimoMomentoEscada(Passageiro *passageiros, int numPassageiros) {
-  int filaEsperando = 0;
-  int tempoFinal = 0;
+  int momento = 0;
+  int indicePassageiro = 0;
+  int previsao = 0;
   int direcao = -1;
-  int i;
 
-  for (i = 0; i < numPassageiros; i++) {
-    if (direcao == -1) {
-      direcao = passageiros[i].direcao;
-      tempoFinal = passageiros[i].tempo + 10;
+  while (indicePassageiro < numPassageiros) {
+      Passageiro passageiroAtual = passageiros[indicePassageiro];
 
-    } else if (passageiros[i].direcao == direcao) {
-      if (filaEsperando > 0 && passageiros[i].tempo > tempoFinal) {
-        filaEsperando = 1;
-        tempoFinal += 10;
-        direcao = passageiros[i].direcao * (-1);
-      } else {
-        direcao = passageiros[i].direcao;
-        tempoFinal = passageiros[i].tempo + 10;
+      if (direcao == -1) {
+          momento = passageiroAtual.tempo < momento ? momento : passageiroAtual.tempo;
+          direcao = passageiroAtual.direcao;
       }
-    } else {
-      if (passageiros[i].tempo > tempoFinal) {
-        if (filaEsperando > 0) {
-          tempoFinal += 10;
-          filaEsperando = 1;
-        } else {
-          tempoFinal = passageiros[i].tempo + 10;
-        }
+      previsao = momento + 10;
+      if (passageiroAtual.direcao == direcao) {
+          momento = passageiroAtual.tempo;
+          previsao = momento + 10;
+          indicePassageiro++;
       } else {
-        filaEsperando++;
+          if (passageiros[indicePassageiro + 1].tempo <= previsao) {
+              momento = previsao;
+          } else {
+              direcao = -1;
+              indicePassageiro++;
+          }
       }
-    }
-  }
-  while (filaEsperando > 0) {
-    tempoFinal += 10;
-    filaEsperando--;
   }
 
-  return tempoFinal;
+  momento += 10;
+  return momento;
 }
 
 int main() {
@@ -78,7 +67,7 @@ int main() {
 
   lerPassageiros("./input/E_5", passageiros, &numPassageiros);
 
-  int fd[2]; 
+  int fd[2];
 
   if (pipe(fd) == -1) {
     perror("Erro ao criar pipe");
