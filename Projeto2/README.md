@@ -1,5 +1,5 @@
 # Projeto 2 - Sistemas Operacionais
-## Tranferência de dundos entre duas contas
+## Tranferência de fundos entre duas contas
 
 ### Para compilar o programa: 
 Abrimos e editamos os programas com o vim:
@@ -20,7 +20,20 @@ gcc proj2.c -o projeto2
 ./projeto2
 ```
 ### Comprovar que os resultados propostos foram alcançados:
+- A conta to pode receber mais de uma transferência simultânea
+  
+- A conta from pode enviar mais de uma transferência simultânea;
+
+  
+- A conta from não pode enviar dinheiro se não tiver mais saldo;
+  
+- A conta to pode trocar de ordem com a conta from, ou seja, a conta que enviava pode
+receber e a conta que recebia pode enviar;
+
+- Poderão ser realizadas até 100 transações simultâneas de transferência
 
 ## Execução do programa
 
-<img src="" alt="execucaoAWS">
+<img src="https://i.imgur.com/t0xyzKp.png" alt="execucaoFromToAWS">
+
+<img src="https://i.imgur.com/mWdgpVb.png" alt="execucaoToFromAWS">
