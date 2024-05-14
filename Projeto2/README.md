@@ -32,8 +32,8 @@ gcc proj2.c -o projeto2
 ### 1) A conta to pode receber mais de uma transferência simultânea;
 ### 2) A conta from pode enviar mais de uma transferência simultânea;
 
-<img src="https://i.imgur.com/3RZm2oE.png" alt="Prova1">
 <img src="https://i.imgur.com/Si5SOh7.png" alt="Prova1">
+<img src="https://i.imgur.com/16JuIwX.png" alt="Prova1">
 - As transferências simultâneas entre as duas contas são possíveis pois criamos todos as 100 threads(50 from->to e 50 to->from) de uma vez, e só então chamamos a função join que aguarda a execução de todas, ou seja ao implementarmos a solução concorrente, permitimos envio e recebimento de diversas tranferências ao mesmo tempo.
 
 
@@ -50,8 +50,8 @@ gcc proj2.c -o projeto2
 
 
 ### 5) Poderão ser realizadas até 100 transações simultâneas de transferência
-<img src="https://i.imgur.com/16JuIwX.png" alt="prova4">
-<img src="https://i.imgur.com/wlGxEHT.png" alt="prova4">
+<img src="https://i.imgur.com/16JuIwX.png" alt="Prova4">
+<img src="https://i.imgur.com/wlGxEHT.png" alt="Prova4">
 - Criamos todos no maximo 100 threads(50 from->to e 50 to->from), o que limita a 100 tranferências totais
 
 
