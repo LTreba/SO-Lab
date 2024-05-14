@@ -39,8 +39,7 @@ gcc proj2.c -o projeto2
 - Nosso programa impede isso ao verificar o valor de tranferência da conta que envia com um if, e so permitir a transferência caso tenha saldo maior igual ao valor passado.
 
 
-### 4) A conta to pode trocar de ordem com a conta from, ou seja, a conta que enviava pode
-receber e a conta que recebia pode enviar;
+### 4) A conta to pode trocar de ordem com a conta from, ou seja, a conta que enviava pode receber e a conta que recebia pode enviar;
 <img src="https://i.imgur.com/3RZm2oE.png" alt="Prova3">
 <img src="https://i.imgur.com/Si5SOh7.png" alt="Prova3">
 - Declaramos as threads de ambas as direções juntas, o que faz com que a ordem possa ser trocada durante a execução.
