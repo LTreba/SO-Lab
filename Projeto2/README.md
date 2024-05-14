@@ -23,7 +23,6 @@ gcc proj2.c -o projeto2
 - A conta to pode receber mais de uma transferência simultânea
   
 - A conta from pode enviar mais de uma transferência simultânea;
-
   
 - A conta from não pode enviar dinheiro se não tiver mais saldo;
   
@@ -33,7 +32,8 @@ receber e a conta que recebia pode enviar;
 - Poderão ser realizadas até 100 transações simultâneas de transferência
 
 ## Execução do programa
-
-<img src="https://i.imgur.com/t0xyzKp.png" alt="execucaoFromToAWS">
-
-<img src="https://i.imgur.com/mWdgpVb.png" alt="execucaoToFromAWS">
+### Caso 1: Duas contas transferindo o mesmo valor entre si
+<img src="https://i.imgur.com/wlGxEHT.png" alt="execucaocaso1FromToAWS">
+### Caso 2: Conta To enviando todo o dinheiro para From
+<img src="https://i.imgur.com/7OI4xQP.png" alt="execucaoToFromAWS">
+**resultado depende do valor que é transferido de to para from e de from para to**
