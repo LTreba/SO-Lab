@@ -77,7 +77,7 @@ int main() {
         }
     }
 
-    for (i = 0; i < 50; i++) {
+    for (i = 0; i < 100; i++) {
         if (pthread_join(threads[i], NULL)) {
             perror("pthread_join");
             exit(1);
