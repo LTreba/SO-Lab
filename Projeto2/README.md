@@ -6,6 +6,10 @@ Neste projeto, desenvolvemos um programa que realiza a transferência de fundos 
 Para realizar os testes, usamos duas abordagens, a primeira ambas as direções de transferência enviam o mesmo valor(100), e na segunda valores diferentes(100 e 0).
 
 ## Para compilar o programa: 
+Instalamos o editor vim:
+```bash
+sudo dnf install vim
+```
 Abrimos e editamos os programas com o vim:
 ```bash
 vim proj2.c
@@ -14,7 +18,7 @@ Instalamos o compilador gcc:
 ```bash
 sudo dnf install gcc
 ```
-E então compilamos ambos os arquivos .c
+E então compilamos o arquivo .c
 ```bash
 gcc proj2.c -o projeto2
 ```
